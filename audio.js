@@ -8,7 +8,7 @@ export class HorselitAudio {
     /** @type {AudioContext | null} */
     this.ctx = null;
     this.enabled = true;
-    this.master = 0.22;
+    this.master = 0.24;
   }
 
   async unlock() {
@@ -43,6 +43,7 @@ export class HorselitAudio {
     this.ensure();
     const ctx = this.ctx;
     if (!ctx) return;
+    if (ctx.state === "suspended") void ctx.resume();
 
     const t0 = ctx.currentTime + when;
     const osc = ctx.createOscillator();
@@ -82,7 +83,7 @@ export class HorselitAudio {
     const u = Math.max(0, Math.min(1, urgency));
     const freq = 280 + u * 420 + Math.sin(u * 12) * 14;
     const dur = 0.04 - u * 0.015;
-    this.tone(freq, dur, "square", 0.06 + u * 0.04);
+    this.tone(freq, dur, "square", 0.09 + u * 0.06);
   }
 
   /** Gate / start beep */

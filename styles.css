@@ -59,7 +59,7 @@ body {
 main {
   width: min(100%, 36rem);
   margin: 0 auto;
-  padding: 1.1rem 1rem 2rem;
+  padding: 1.1rem 1rem max(2rem, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -116,12 +116,15 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  max-width: 100%;
+  flex: 1 1 auto;
+  justify-content: flex-end;
 }
 
-.meter-actions button,
-.controls button {
+.meter-actions button {
+  flex: 1 1 auto;
   min-height: 44px;
-  min-width: 44px;
+  min-width: min(100%, 5.5rem);
 }
 
 .tracks {
@@ -302,7 +305,7 @@ main {
 
 .bet-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.45rem;
 }
 
@@ -321,11 +324,22 @@ main {
   cursor: pointer;
   text-align: left;
   font: inherit;
+  touch-action: manipulation;
+  transition:
+    border-color 0.08s ease,
+    background 0.08s ease,
+    transform 0.08s ease;
 }
 
 .bet-card:hover:not(:disabled) {
   border-color: hsl(var(--hue) 60% 45%);
   background: color-mix(in oklab, hsl(var(--hue) 50% 50%) 12%, var(--panel));
+}
+
+.bet-card:active:not(:disabled) {
+  border-color: hsl(var(--hue) 65% 42%);
+  background: color-mix(in oklab, hsl(var(--hue) 55% 48%) 22%, var(--panel));
+  transform: scale(0.98);
 }
 
 .bet-card:disabled {
@@ -373,9 +387,20 @@ main {
 }
 
 .controls {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  padding: 0.65rem 0 max(0.65rem, env(safe-area-inset-bottom));
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.controls button {
+  flex: 1 1 auto;
+  min-height: 44px;
 }
 
 button {
@@ -385,9 +410,13 @@ button {
   color: var(--on-accent);
   border-radius: 0.55rem;
   padding: 0.55rem 0.9rem;
+  min-height: 44px;
   font-weight: 650;
   cursor: pointer;
   touch-action: manipulation;
+  transition:
+    filter 0.08s ease,
+    transform 0.08s ease;
 }
 
 button.secondary {
@@ -398,6 +427,11 @@ button.secondary {
 
 button:hover:not(:disabled) {
   filter: brightness(1.05);
+}
+
+button:active:not(:disabled) {
+  filter: brightness(0.92);
+  transform: scale(0.98);
 }
 
 button:disabled {
