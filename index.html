@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="賽馬機：六軌燈光賽馬、押注結算、自製音效。純娛樂、無真實金錢。Playgrounds SAM。"
+    />
+    <title>賽馬機</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <h1>賽馬機</h1>
+        <p class="tagline">六軌燈光 · 自製音效 · 純娛樂無兌現</p>
+      </header>
+
+      <section class="meter" aria-label="娛樂幣">
+        <div class="meter-item">
+          <span class="label">娛樂幣</span>
+          <strong id="credits">100</strong>
+        </div>
+        <div class="meter-item">
+          <span class="label">本局押注</span>
+          <strong id="total-bet">0</strong>
+        </div>
+        <div class="meter-actions">
+          <button type="button" id="btn-credit">+50 幣</button>
+          <button type="button" id="btn-mute" class="secondary" aria-pressed="true">
+            音效開
+          </button>
+        </div>
+      </section>
+
+      <div
+        id="tracks"
+        class="tracks"
+        role="img"
+        aria-label="六軌平行燈光賽道"
+      ></div>
+
+      <p id="status" class="status" role="status">準備開始</p>
+
+      <section class="bets" aria-label="押注">
+        <h2>點馬號押注（每點 1 幣，可押多匹）</h2>
+        <div id="bet-grid" class="bet-grid"></div>
+      </section>
+
+      <div class="controls">
+        <button type="button" id="btn-start">開跑</button>
+        <button type="button" id="btn-clear" class="secondary">撤銷押注</button>
+      </div>
+
+      <p class="disclaimer">
+        本遊戲為懷舊娛樂模擬。音效以瀏覽器即時合成，未使用任何商業機台取樣或受保護素材。不涉及真實金錢、兌換或賭博。
+      </p>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
